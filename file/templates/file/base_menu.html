@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Это базовая страница + нужная страница</title>
+</head>
+<body>
+<!-- Нужно попробовать цикл в цикле-->
+{% for posts in posts%}
+
+    {{ posts.subject_file }}
+        <li><a href="{% url 'subject_detail' pk=posts.pk %}">{{ posts.subject_file_post }}ggg</a></li>
+
+         {% endfor %}
+
+    {% block menu%}
+    {% endblock %}
+</body>
+</html>

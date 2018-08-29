@@ -6,10 +6,11 @@
 </head>
 <body>
 <!-- Нужно попробовать цикл в цикле-->
-{% for posts in posts%}
+{% for post in subject %}
 
-    {{ posts.subject_file }}
-     {{ posts.subject_files }}
+    {{ post.subject_file }}
+        <li><a href="{% url 'subject_detail' pk=post.pk %}">{{ post.subject_files }}</a></li>
+
          {% endfor %}
 
 <!--{{ posts.subject_files }}
