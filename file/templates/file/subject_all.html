@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Нужно попробовать цикл в цикле-->
+{% for posts in posts%}
+
+    {{ posts.subject_file }}
+     {{ posts.subject_files }}
+         {% endfor %}
+
+<!--{{ posts.subject_files }}
+{% for result in posts.subject_file_post.all %}
+
+                    <li>{{ result.subject_files_post.tittle }}</li>
+                    <li>{{ result.subject_files }}</li>
+                {% endfor %}-->
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ posts.subject_files }}
+ {% for result in posts.subject_file_post.all%}
+        {{ result.tittle }}
+
+         {% endfor %}
+</body>
+</html>
