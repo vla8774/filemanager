@@ -1,7 +1,7 @@
 {% extends 'file/base_menu.html' %}
-{% block menu %}
+{% block content %}
 gqagg
-{% for post in posts %}
-    <img src="media/{{ post.file }}" />
+{% for fl in files %}
+    <img src="media/{{ fl.file }}" />
 {% endfor %}
 {% endblock %}
