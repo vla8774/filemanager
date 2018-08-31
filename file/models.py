@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.utils import timezone
+import transliterate
 
 
 # Create your models here.
@@ -28,6 +29,15 @@ class SubjectFiles(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     subject_files = models.CharField(max_length=140)
     description_subject = models.TextField()
+    url = transliterate.translit('привет', reversed=True)
 
     def __str__(self):
         return self.subject_files
+
+    def get_url(self):
+        return self.url
+
+
+class MainMenu(models.Model):
+    item = models.CharField(max_length=50)
+    url = models.ForeignKey('SubjectFiles', on_delete=models.CASCADE, related_name='subject_file_pos1')

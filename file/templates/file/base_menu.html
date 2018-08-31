@@ -2,18 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Это базовая страница + нужная страница</title>
+    <title>ИНФОРМАЦИОННАЯ СИСТЕМА</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+
 </head>
 <body>
-<!-- Нужно попробовать цикл в цикле-->
-{% for posts in posts%}
+<div class="container">
 
-    {{ posts.subject_file }}
-        <li><a href="{% url 'subject_detail' pk=posts.pk %}">{{ posts.subject_file_post }}ggg</a></li>
+      <!-- Static navbar -->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'post_file'  %}">Информационная система</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'post_file'  %}">Главная страница</a></li>
+                <li><a href="{% url 'subject_all'  %}">Все документы</a></li>
+               <!-- {% for subject in subjects %}
+                    <li><a href="{% url 'subject_detail' fl=subject.subject_files %}">{{ subject.subject_files }}</a></li>
+                 {% endfor %}-->
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Документы<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                 {% for subject in subjects %}
+                    <li><a href="{% url 'subject_detail' fl=subject.subject_files %}">{{ subject.subject_files }}</a></li>
+                 {% endfor %}
 
-         {% endfor %}
+                </ul>
+                <!--     <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="./">Меню</a></li>
+                        <li><a href="../navbar-static-top/">Статическое</a></li>
+                        <li><a href="../navbar-fixed-top/">Фиксированное</a></li>
+            </ul>-->
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </div>
 
-    {% block menu%}
-    {% endblock %}
+
+    </div> <!-- /container -->
+
+
+{% block content %}{% endblock %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>

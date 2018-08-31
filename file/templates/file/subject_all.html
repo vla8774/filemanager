@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<!-- Нужно попробовать цикл в цикле-->
-{% for post in subject %}
+{% extends "file/base_menu.html" %}
+{% block content %}
+<ul>
 
-    {{ post.subject_file }}
-        <li><a href="{% url 'subject_detail' pk=post.pk %}">{{ post.subject_files }}</a></li>
+	{% for post in subject %}
+        <li><a href="{% url 'subject_detail' fl=post.subject_files %}">{{ post.subject_files }}</a></li>
 
-         {% endfor %}
-
-<!--{{ posts.subject_files }}
-{% for result in posts.subject_file_post.all %}
-
-                    <li>{{ result.subject_files_post.tittle }}</li>
-                    <li>{{ result.subject_files }}</li>
-                {% endfor %}-->
-</body>
-</html>
+			<ul>
+			{% for fl in post.subject_file_post.all %}
+				<li>{{ fl.description_file_post}}</li>
+				 <a href="media/{{ fl.file }}" />Просмотреть</a>
+			{% endfor %}
+			</ul>
+	{% endfor %}
+</ul>
+{% endblock %}
