@@ -3,64 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>ИНФОРМАЦИОННАЯ СИСТЕМА</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container">
-
-      <!-- Static navbar -->
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'post_file'  %}">Информационная система</a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'post_file'  %}">Главная страница</a></li>
-                <li><a href="{% url 'subject_all'  %}">Все документы</a></li>
-               <!-- {% for subject in subjects %}
-                    <li><a href="{% url 'subject_detail' fl=subject.subject_files %}">{{ subject.subject_files }}</a></li>
-                 {% endfor %}-->
-                <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Документы<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                 {% for subject in subjects %}
-                    <li><a href="{% url 'subject_detail' fl=subject.subject_files %}">{{ subject.subject_files }}</a></li>
-                 {% endfor %}
-
-                </ul>
-                <!--     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="./">Меню</a></li>
-                        <li><a href="../navbar-static-top/">Статическое</a></li>
-                        <li><a href="../navbar-fixed-top/">Фиксированное</a></li>
-            </ul>-->
-              </li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </div>
-
-
+    <div class="container">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link disabled" href="/">Главная</a>
+            </li>
+            {% for subject in subjects %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'subject_detail' fl=subject.subject_files %}">{{ subject.subject_files }}</a>
+                </li>
+            {% endfor %}
+            <form class="form-inline">
+                <button class="btn btn-outline-success" type="button">Телефонный справочник</button>
+            </form>
+        </ul>
     </div> <!-- /container -->
+    <div class="container">
+{% block content %}
 
 
-{% block content %}{% endblock %}
+{% endblock %}
+   </div> <!-- /container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 </body>
 </html>

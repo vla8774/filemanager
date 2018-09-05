@@ -1,16 +1,36 @@
+
+
 {% extends "file/base_menu.html" %}
+
 {% block content %}
+
 <ul>
+<!-- Нужно попробовать цикл в цикле-->
+{% for post in subject %}
 
-	{% for post in subject %}
-        <li><a href="{% url 'subject_detail' fl=post.subject_files %}">{{ post.subject_files }}</a></li>
-
+    {{ post.subject_file }}
+        <li>
+			
+			<a href="{% url 'subject_detail' fl=post.subject_files %}">{{ post.subject_files }}</a>
 			<ul>
+
 			{% for fl in post.subject_file_post.all %}
-				<li>{{ fl.description_file_post}}</li>
-				 <a href="media/{{ fl.file }}" />Просмотреть</a>
+			<li>{{ fl }}</li>
 			{% endfor %}
+
 			</ul>
-	{% endfor %}
+
+		</li>
+
+         {% endfor %}
 </ul>
+<!--{{ posts.subject_files }}
+{% for result in posts.subject_file_post.all %}
+
+                    <li>{{ result.subject_files_post.tittle }}</li>
+                    <li>{{ result.subject_files }}</li>
+                {% endfor %}-->
+
 {% endblock %}
+
+>>>>>>> 36111c3b5e9a40ca5b1d0c50a20238d75dda3d56

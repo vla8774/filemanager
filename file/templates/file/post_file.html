@@ -1,29 +1,15 @@
 
 {% extends 'file/base_menu.html' %}
 
+
 {% block content%}
 
-<!--<div class="container">
-{% for fl in files %}
-    {{fl.description_file_post}}
-    <a href="media/{{ fl.file }}" />Просмотреть</a>
-    <a href="media/{{ fl.file }}" />Скачать</a>
-{% endfor %}
-</div> <!-- /container -->
 
+<br>
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
 
-  <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Информационая система</h1>
-        <p>В даннной системе <strong>ООО "Газпром межрегионгаз Рязань"</strong> Вы можете ознакомится с вутренней документацией</p>
-         <p>Чтобы ознакомится со всеми внутренней документацией нажмите кнопку: "Ознакомится с документами"</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="{% url 'subject_all'  %}" role="button">Ознакомится с документами &raquo;</a>
-        </p>
-      </div>
+
+
 
         <table class="table">
             <thead class="thead-default">
@@ -41,34 +27,15 @@
                  <!-- <th scope="row">1</th> -->
                     <td> {{fl.description_file_post}}</td>
 
-                    <td><a href="media/{{ fl.file }}" />Просмотреть</a></td>
+
                     <td><a href="media/{{ fl.file }}" download>Скачать</a></td>
+                    <td><a href="{% url 'file_detail' url_post=fl.url %}">Просмотреть</a></td>
+                 
                 </tr>
             {% endfor %}
         </tbody>
         </table>
-        </div><!-- /col-md-8 -->
-        <div class="col-md-4 hidden-xs hidden-sm">
-                <div class="row">
-                    <div class="col-md-12 col-xs-6">
-                        <div class="bs-docs-sidebar hidden-print" role="complementary" style="background: aliceblue; border-radius: 5px; padding: 10px 0 10px 0;">
-                        <ul class="nav bs-docs-sidenav">
-                           <!-- <li><a href="#template">Базовый шаблон</a></li>
-                            <li><a href="#examples">Примеры шаблонов Bootstrap</a>-->
-                                <ul class="nav">
-                                        {% for subject in subjects %}
-                                            <li><a href="{% url 'subject_detail' fl=subject.subject_files %}">{{ subject.subject_files }}</a></li>
-                                        {% endfor %}
-                                </ul>
-                            </li>
-                        </ul>
-                        </div>
-                    </div>
-                </div>
-        </div><!-- container bs-docs-container -->
 
-
-   </div><!-- /row -->
 </div> <!-- /container -->
 
 
@@ -85,3 +52,4 @@
     </div> <!-- /container -->
 
             {% endblock %}
+
