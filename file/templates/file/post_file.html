@@ -19,6 +19,7 @@
 
                     <th>Просмотреть файл</th>
                     <th>Скачать файл</th>
+                    <th>Изменить файл</th>
                 </tr>
             </thead>
         <tbody>
@@ -30,7 +31,8 @@
 
                     <td><a href="media/{{ fl.file }}" download>Скачать</a></td>
                     <td><a href="{% url 'file_detail' url_post=fl.url %}">Просмотреть</a></td>
-                 
+                    <td><a href="{% url 'file_edit' url_post=fl.url %}">Изменить</a></td>
+
                 </tr>
             {% endfor %}
         </tbody>

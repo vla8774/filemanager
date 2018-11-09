@@ -1,10 +1,13 @@
 from django import forms
 
-from .models import Comment
+from .models import FilePost
 
 
-class CommentForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
 
     class Meta:
-        model = Comment
-        fields = ('author', 'text',)
+        model = FilePost
+        fields = ('title',
+                  'description_file_post',
+                  'subject_file',
+                  'file')

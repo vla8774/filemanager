@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
+from bootstrap_modal_forms.mixins import PassRequestMixin
 from .forms import *
 from .models import *
 
@@ -13,6 +13,8 @@ def post_file(request):
 
 def get_base_menu(data):
     data["subjects"] = SubjectFiles.objects.all()
+
+
 
 
 def subject_all(request):
@@ -53,15 +55,37 @@ def file_detail(request, url_post):
     return render(request, 'file/file_detail.html', data)
 
 
-def add_comment_to_post(request, url_post):
+'''class FileNew(PassRequestMixin, SuccessMessageMixin, generic.CreateView):
+    template_name = 'file/file_edit.html',
+    form_class = PostForm
+    success_message = 'Success: Book was created.'
+    success_url = reverse_lazy('index')'''
+
+
+def file_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.created_date = timezone.now()
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('file_detail', url_post=post.url)
+    else:
+        form = PostForm()
+    return render(request, 'file/file_edit.html', {'form': form})
+
+
+def file_edit(request, url_post):
     post = get_object_or_404(FilePost, url=url_post)
     if request.method == "POST":
-        form = CommentForm(request.POST)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.save()
-            return redirect('file_detail', url=url_post)
+            post = form.save(commit=False)
+            #post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('file_detail', url_post=post.url)
     else:
-        form = CommentForm()
-    return render(request, 'file/add_comment_to_post.html', {'form': form})
+        form = PostForm(instance=post)
+        return render(request, 'file/file_edit.html', {'form': form})

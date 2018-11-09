@@ -1,0 +1,14 @@
+  <div class="modal-body">
+                  <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+        {{ form.as_p }}
+
+
+
+                </div>
+                <div class="modal-footer">
+                      <button type="submit" class="save btn btn-default">Save</button>
+                </div>
+
+ </form>

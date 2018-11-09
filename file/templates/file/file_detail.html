@@ -9,6 +9,7 @@
   <p class="lead">Что бы ознакомится с файлом необходимо скачать его копию на свой компьютер. Чтобы скачать копию файла нажмите кнопку: "Скачать",
       начнется загрузка файла и он будет доступен на вашем компьютере</p>
   <hr class="my-4">
+
   <p>{{ post.subject_file}}
     {% if post.published_date %}
             <div class="date">
@@ -17,18 +18,9 @@
         {% endif %}</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="/media/{{ post.file }}" role="button">Скачать</a>
+       <a class="btn btn-default" href="{% url 'file_edit' url_post=post.url %}">Изменить</a>
   </p>
 </div>
-<a class="btn btn-default" href="{% url 'add_comment_to_post' url_post=post.url %}">Add comment</a>
-<hr>
-{% for comment in post.comments.all %}
-    <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
-        <strong>{{ comment.author }}</strong>
-        <p>{{ comment.text|linebreaks }}</p>
-    </div>
-{% empty %}
-    <p>No comments here yet :(</p>
-{% endfor %}
+
 
      {% endblock %}
