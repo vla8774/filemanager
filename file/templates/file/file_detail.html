@@ -18,7 +18,7 @@
         {% endif %}</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="/media/{{ post.file }}" role="button">Скачать</a>
-       <a class="btn btn-default" href="{% url 'file_edit' url_post=post.url %}">Изменить</a>
+       <a class="btn btn-default" href="{% url 'file_edit' slug=post.slug %}">Изменить</a>
   </p>
 </div>
 

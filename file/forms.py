@@ -1,9 +1,10 @@
 from django import forms
 
-from .models import FilePost
+from .models import FilePost, SubjectFiles
+from bootstrap_modal_forms.mixins import PopRequestMixin, CreateUpdateAjaxMixin
 
 
-class PostForm(forms.ModelForm):
+class PostForm(PopRequestMixin, CreateUpdateAjaxMixin, forms.ModelForm):
 
     class Meta:
         model = FilePost
@@ -11,3 +12,11 @@ class PostForm(forms.ModelForm):
                   'description_file_post',
                   'subject_file',
                   'file')
+
+
+class SubjectForm(PopRequestMixin, CreateUpdateAjaxMixin, forms.ModelForm):
+
+    class Meta:
+        model = SubjectFiles
+        fields = ('subject_files',
+                  'description_subject')

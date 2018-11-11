@@ -3,55 +3,93 @@
 
 
 {% block content%}
+  {% if user.is_authenticated %}
+<table id="mytable" class="table table-bordred table-striped">
+                   <thead>
+
+                    <th>Описание</th>
+                    <th><i class="fas fa-download"></i></th>
+                    <th><i class="fas fa-book-open"></i></th>
+                    <th><i class="fas fa-edit"></i></th>
+                    <th><i class="fas fa-trash-alt"></i></th>
+                   </thead>
+    <tbody>
+{% for fl in files %}
+    <tr>
+        <td>{{fl.description_file_post}}</td>
+        <td><a href="media/{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i></a></td>
+        <td>
+            <button type="button" class="read-file btn btn-sm btn-outline-primary" data-id="{% url 'file_read' slug=fl.slug %}">
+                            <i class="fas fa-book-open"></i>
+            </button>
+        </td>
+        <td>
+            <button type="button" class="update-file btn btn-sm btn-outline-warning" data-id="{% url 'file_edit' slug=fl.slug %}">
+                                <i class="fas fa-edit"></i>
+            </button>
+        </td>
+        <td>
+           <button type="button" class="delete-file btn btn-sm btn-outline-danger" data-id="{% url 'file_delete' slug=fl.slug %}">
+                            <i class="fas fa-trash-alt"></i>
+           </button>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+
+</table>
+{% else %}
+<table id="mytable" class="table table-bordred table-striped">
+                   <thead>
+
+                    <th>Описание</th>
+                    <th><i class="fas fa-download"></i></th>
+                    <th><i class="fas fa-book-open"></i></th>
+
+                   </thead>
+    <tbody>
+{% for fl in files %}
+    <tr>
+        <td>{{fl.description_file_post}}</td>
+        <td><a href="media/{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i></a></td>
+        <td>
+            <button type="button" class="read-file btn btn-sm btn-outline-primary" data-id="{% url 'file_read' slug=fl.slug %}">
+                            <i class="fas fa-book-open"></i>
+            </button>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+
+</table>
+{% endif %}
 
 
-<br>
-<div class="container">
 
 
 
 
-        <table class="table">
-            <thead class="thead-default">
-                <tr>
-            <!-- <th>#</th> -->
-                    <th>Описание файла</th>
-
-                    <th>Просмотреть файл</th>
-                    <th>Скачать файл</th>
-                    <th>Изменить файл</th>
-                </tr>
-            </thead>
-        <tbody>
-            {% for fl in files %}
-                <tr>
-                 <!-- <th scope="row">1</th> -->
-                    <td> {{fl.description_file_post}}</td>
-
-
-                    <td><a href="media/{{ fl.file }}" download>Скачать</a></td>
-                    <td><a href="{% url 'file_detail' url_post=fl.url %}">Просмотреть</a></td>
-                    <td><a href="{% url 'file_edit' url_post=fl.url %}">Изменить</a></td>
-
-                </tr>
-            {% endfor %}
-        </tbody>
-        </table>
-
-</div> <!-- /container -->
 
 
 
 
-<div class="container">
-
-
-      <hr>
-
-      <footer>
-        <p>&copy; Газпром межрегионгаз Рязань 2018</p>
-      </footer>
-    </div> <!-- /container -->
 
             {% endblock %}
 
+{% block JS %}
+<script type="text/javascript">
+                             // Update
+      $(".update-file").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+       // Delete
+      $(".delete-file").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+      // Read
+      $(".read-file").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+            </script>
+
+{% endblock %}

@@ -1,4 +1,5 @@
 {% load widget_tweaks %}
+
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
 
@@ -37,6 +38,6 @@
 </div>
 
     <div class="modal-footer">
-    <button type="button" class="submit-btn btn btn-primary" formnovalidate="formnovalidate">Добавить файл</button>
+     <button type="submit" class="save btn btn-default">Save</button>
   </div>
 </form>

@@ -7,4 +7,83 @@
 
          {% endfor %}
 
+  {% if user.is_authenticated %}
+<table id="mytable" class="table table-bordred table-striped">
+                   <thead>
+
+                    <th>Описание</th>
+                    <th><i class="fas fa-download"></i></th>
+                    <th><i class="fas fa-book-open"></i></th>
+                    <th><i class="fas fa-edit"></i></th>
+                    <th><i class="fas fa-trash-alt"></i></th>
+                   </thead>
+    <tbody>
+{% for fl in posts.subject_file_post.all  %}
+    <tr>
+        <td>{{fl.description_file_post}}</td>
+        <td><a href="media/{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i></a></td>
+        <td>
+            <button type="button" class="read-file btn btn-sm btn-outline-primary" data-id="{% url 'file_read' slug=fl.slug %}">
+                            <i class="fas fa-book-open"></i>
+            </button>
+        </td>
+        <td>
+            <button type="button" class="update-file btn btn-sm btn-outline-warning" data-id="{% url 'file_edit' slug=fl.slug %}">
+                                <i class="fas fa-edit"></i>
+            </button>
+        </td>
+        <td>
+           <button type="button" class="delete-file btn btn-sm btn-outline-danger" data-id="{% url 'file_delete' slug=fl.slug %}">
+                            <i class="fas fa-trash-alt"></i>
+           </button>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+
+</table>
+{% else %}
+<table id="mytable" class="table table-bordred table-striped">
+                   <thead>
+
+                    <th>Описание</th>
+                    <th><i class="fas fa-download"></i></th>
+                    <th><i class="fas fa-book-open"></i></th>
+
+                   </thead>
+    <tbody>
+{% for fl in posts.subject_file_post.all  %}
+    <tr>
+        <td>{{fl.description_file_post}}</td>
+        <td><a href="media/{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i></a></td>
+        <td>
+            <button type="button" class="read-file btn btn-sm btn-outline-primary" data-id="{% url 'file_read' slug=fl.slug %}">
+                            <i class="fas fa-book-open"></i>
+            </button>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+
+</table>
+{% endif %}
+
+{% endblock %}
+
+{% block JS %}
+<script type="text/javascript">
+                             // Update
+      $(".update-file").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+       // Delete
+      $(".delete-file").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+      // Read
+      $(".read-file").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+            </script>
+
 {% endblock %}

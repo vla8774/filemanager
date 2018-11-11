@@ -3,6 +3,69 @@
 {% extends "file/base_menu.html" %}
 
 {% block content %}
+ {% if user.is_authenticated %}
+<table id="mytable" class="table table-bordred table-striped">
+                   <thead>
+
+                    <th>Тема</th>
+                    <th>Описание</th>
+                    <th><i class="fas fa-book-open"></i></th>
+                    <th><i class="fas fa-edit"></i></th>
+                    <th><i class="fas fa-trash-alt"></i></th>
+                   </thead>
+    <tbody>
+ {% for post in subject %}
+    <tr>
+        <td>{{post.subject_files}}</td>
+        <td>{{post.description_subject}}</td>
+        <td>
+            <button type="button" class="read-subject btn btn-sm btn-outline-primary" data-id="{% url 'subject_read' slug=post.slug %}">
+                            <i class="fas fa-book-open"></i>
+                        </button>
+        </td>
+        <td>
+           <button type="button" class="update-subject btn btn-sm btn-outline-warning" data-id="{% url 'subject_edit' slug=post.slug %}">
+                                <i class="fas fa-edit"></i>
+                        </button>
+        </td>
+        <td>
+           <button type="button" class="delete-subject btn btn-sm btn-outline-danger" data-id="{% url 'subject_delete' slug=post.slug %}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+
+</table>
+{% else %}
+<table id="mytable" class="table table-bordred table-striped">
+                   <thead>
+
+                    <th>Тема</th>
+                    <th>Описание</th>
+                    <th><i class="fas fa-book-open"></i></th>
+
+                   </thead>
+    <tbody>
+ {% for post in subject %}
+    <tr>
+        <td>{{post.subject_files}}<</td>
+        <td>{{post.description_subject}}</td>
+        <td>
+            <button type="button" class="read-subject btn btn-sm btn-outline-primary" data-id="{% url 'subject_read' slug=post.slug %}">
+                            <i class="fas fa-book-open"></i>
+                        </button>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+
+</table>
+{% endif %}
+
+
+
 
 <ul>
 <!-- Нужно попробовать цикл в цикле-->
@@ -11,7 +74,7 @@
     {{ post.subject_file }}
         <li>
 			
-			<a href="{% url 'subject_detail' fl=post.subject_files %}">{{ post.subject_files }}</a>
+			<a href="{% url 'subject_detail' fl=post.slug %}">{{ post.subject_files }}</a>
 			<ul>
 
 			{% for fl in post.subject_file_post.all %}
@@ -24,6 +87,8 @@
 
          {% endfor %}
 </ul>
+
+
 <!--{{ posts.subject_files }}
 {% for result in posts.subject_file_post.all %}
 
@@ -33,4 +98,20 @@
 
 {% endblock %}
 
->>>>>>> 36111c3b5e9a40ca5b1d0c50a20238d75dda3d56
+{% block JS %}
+<script type="text/javascript">
+                             // Update
+      $(".update-subject").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+       // Delete
+      $(".delete-subject").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+      // Read
+      $(".read-subject").each(function () {
+        $(this).modalForm({formURL: $(this).data('id')});
+      });
+            </script>
+
+{% endblock %}
