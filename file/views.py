@@ -136,3 +136,16 @@ class SubjectRead(generic.DetailView):
     context_object_name = 'subject'
     template_name = 'file/subject_read.html'
 
+
+class PhoneEdit(PassRequestMixin, generic.UpdateView):
+    model = Phone
+    template_name = 'file/phone_update.html'
+    form_class = PhoneForm
+    success_url = reverse_lazy('post_file')
+
+
+def post_phone(request):
+    data = {}
+    get_base_menu(data)
+    data["files"] = Phone.objects.all()
+    return render(request, 'file/post_phone.html', data)

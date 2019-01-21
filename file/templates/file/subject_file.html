@@ -4,7 +4,7 @@
 {{ posts.subject_files }}
  {% for result in posts.subject_file_post.all%}
         {{ result.tittle }}
-
+        {{ result.description_subject }}
          {% endfor %}
 
   {% if user.is_authenticated %}

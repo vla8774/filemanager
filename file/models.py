@@ -21,6 +21,12 @@ class SubjectFiles(models.Model):
         super(SubjectFiles, self).save(*args, **kwargs)
 
 
+class Phone(models.Model):
+    published_date = models.DateTimeField(
+        blank=True, null=True)
+    file = models.FileField(blank=True, null=True, )
+
+
 class FilePost(models.Model):
     title = models.CharField(max_length=140, blank=True, null=True)
     subject_file = models.ForeignKey(SubjectFiles, on_delete=models.CASCADE, related_name='subject_file_post')

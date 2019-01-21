@@ -1,0 +1,11 @@
+
+{% extends 'file/base_menu.html' %}
+
+
+{% block content%}
+
+{% for fl in files %}
+ <a href="media/{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i> Загрузить справочник от {{ fl.published_date }} </a>
+{% endfor %}
+
+{% endblock %}

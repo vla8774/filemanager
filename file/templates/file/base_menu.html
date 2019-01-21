@@ -119,21 +119,22 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                         <button class="btn btn-outline-success" type="button">Телефонный справочник</button>
+                            <a class="btn btn-outline-success" href="/phone/">Телефонный справочник</a>
                         </ul>
                     </div>
                 </div>
             </nav>
 
             <h2>Информационная система ООО "Газпром межрегионгаз Рязань"</h2>
-            <p>ознакомьтесь с документацией</p>
+
 
             <div class="line"></div>
+        <div class="container">
 {% block content %}
 
 
 {% endblock %}
-
+        </div>
         </div>
     </div>
 <div style="position: fixed;bottom:25px;right:5px;">
@@ -142,6 +143,10 @@
                     <button type="button" class="file-new-btn btn btn-primary btn-rounded"><i class="fas fa-plus-circle text-primary rounded-circle bg-white mr-1" style="padding: 7px 6px;"></i> Файл</button>
                     <button type="button" class="subject-new-btn btn btn-primary btn-rounded"><i class="fas fa-plus-circle text-primary rounded-circle bg-white mr-1" style="padding: 7px 6px;"></i> Тему</button>
                     <a class="btn btn-warning btn-rounded" href="/subject/"><i class="fas fa-sync-alt text-warning rounded-circle bg-white mr-1" style="padding: 7px 6px;"></i>Изменить тему</a>
+
+                    <button type="button" class="update-phone btn btn-warning btn-rounded" data-id="{% url 'phone_edit' pk=1 %}">
+                            <i class="fas fa-sync-alt text-warning rounded-circle bg-white mr-1" style="padding: 7px 6px;"></i>Обновить справочник
+                     </button>
                    <!--  Вы вошли как {{ user.get_username }}&nbsp;-->
                     <a class="btn btn-outline-danger btn-circle" href="{% url 'logout'%}?next={{request.path}}"><i class="fas fa-user"></i></a>
                     {% else %}
@@ -156,6 +161,9 @@
 </div>
 </div>-->
                     {% endif %}
+
+
+
 </div>
 
      <!-- JavaScript -->
@@ -167,7 +175,9 @@
         <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
             <script type="text/javascript">
                         $(function () {
-
+                                        $(".update-phone").each(function () {
+                                                $(this).modalForm({formURL: $(this).data('id')});
+                                                    });
                                         $(".file-new-btn").modalForm({formURL: "{% url 'file_new' %}"});
                                         $(".subject-new-btn").modalForm({formURL: "{% url 'subject_new' %}"});
                                         // Log in & Sign up buttons
