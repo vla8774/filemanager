@@ -1,14 +1,15 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>ИНФОРМАЦИОННАЯ СИСТЕМА</title>
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style5.css' %}">
+        <link rel="stylesheet" href="{% static 'css/simple-sidebar.css' %}">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <style>
+
             .container_comment {
                     width: auto;
                     max-width: 680px;
@@ -43,100 +44,48 @@
     <div class="modal-content"></div>
   </div>
 </div>
+<div id="wrapper">
 
-<div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <img src="{% static 'img/logo.png' %}" alt="Письма мастера дзен">
-
-            </div>
-
-            <ul class="list-unstyled components">
-                <p>  <a style="color: #403d3d;" href="/">Все документы</a></p>
-                <!--<li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/">
+                        Список документов
+                    </a>
                 </li>
-                <li>
-                    <a href="#">About</a>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>-->
 
-                {% for subject in subjects %}
+                 {% for subject in subjects %}
                 <li>
                     <a href="{% url 'subject_detail' fl=subject.slug %}">{{ subject.subject_files }}</a>
                 </li>
                 {% endfor %}
-
             </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-            <!--<ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>-->
-        </nav>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>Информационная система ООО "Газпром межрегионгаз Рязань"</h1>
+                <p>В данной системы вы можете ознакомится с документами компании и скачать телефонный справочник</p>
 
-        <!-- Page Content Holder -->
-        <div id="content">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <a class="btn btn-outline-success" href="/phone/">Телефонный справочник</a>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <h2>Информационная система ООО "Газпром межрегионгаз Рязань"</h2>
-
-
-            <div class="line"></div>
-        <div class="container">
+                <a href="#menu-toggle" class="btn btn-outline-primary" id="menu-toggle">Ознакомится с документами</a>
+                <a class="btn btn-outline-success" href="/phone/">Телефонный справочник</a>
+                <hr></br>
 {% block content %}
 
 
 {% endblock %}
+            </div>
         </div>
-        </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
+    <!-- /#wrapper -->
+
+
+
 <div style="position: fixed;bottom:25px;right:5px;">
                     {% if user.is_authenticated %}
 
@@ -193,6 +142,19 @@
             });
         });
             </script>
+    <!-- Bootstrap core JavaScript -->
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 {% block JS %}
 
 
