@@ -3,9 +3,21 @@
 
 
 {% block content%}
+<div class="jumbotron">
+  <h1 class="display-4">Телефонный справочник</h1>
+      {% for fl in files %}
+  <p class="lead">Дата обновления справочника {{ fl.published_date }} </p>
+  <hr class="my-4">
 
-{% for fl in files %}
- <a href="media/{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i> Загрузить справочник от {{ fl.published_date }} </a>
+    <p>На этой странице Вы можете загрузить актуальную версию телефонного справочника ООО "Газпром межрегионгаз Рязань" на свой компьютер. </p>
+    <p>Для того что бы загрузить справочник нажмите кнопку.</p>
+  <p class="lead">
+
+        <a href="media/{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i> Загрузить справочник  </a>
+      <a href="{{MEDIA_URL}}{{ fl.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i> Загрузить справочник  </a>
 {% endfor %}
+  </p>
+</div>
+
 
 {% endblock %}

@@ -2,11 +2,12 @@
 # Django
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views import generic
 from bootstrap_modal_forms.mixins import PassRequestMixin, LoginAjaxMixin
 # Project
-
+from django.shortcuts import redirect
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 
 from .forms import CustomUserCreationForm
@@ -32,4 +33,6 @@ class Change(generic.CreateView):
     template_name = 'account/change.html'
     success_message = 'Success: You were successfully logged in.'
     success_url = reverse_lazy('post_list')
+
+
 

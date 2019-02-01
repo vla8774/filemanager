@@ -5,6 +5,8 @@ from file import views
 urlpatterns = [
     url(r'^$', views.post_file, name='post_file'),
     url(r'^phone/$', views.post_phone, name='post_phone'),
+    url(r'^documents/telephone-directory.php', views.redirect_view, name='redirect'),
+    url(r'^documents/', views.redirect_view_doc, name='redirect2'),
     url(r'^subject/(?P<fl>.+)/$', views.subject_detail, name='subject_detail'),
     url(r'^subject/$', views.subject_all, name='subject_all'),
     url(r'^file/(?P<url_post>.+)/$', views.file_detail, name='file_detail'),

@@ -149,3 +149,21 @@ def post_phone(request):
     get_base_menu(data)
     data["files"] = Phone.objects.all()
     return render(request, 'file/post_phone.html', data)
+
+
+def redirect_view(request):
+
+    if request.user.is_authenticated:
+
+        return redirect("post_phone")
+
+    return redirect("post_phone")
+
+
+def redirect_view_doc(request):
+
+    if request.user.is_authenticated:
+
+        return redirect("/")
+
+    return redirect("/")

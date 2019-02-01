@@ -1,42 +1,34 @@
 {% load widget_tweaks %}
 
 <div class="modal-header">
-  <h3 class="modal-title">Book details</h3>
+  <h3 class="modal-title">Детали файла</h3>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
 <div class="modal-body">
-
+Необходимо скачать файл, что бы ознакомится с ним на компьютере
   <div class="">
-    Title:
-    {{ post.subject_file }}
+    Название файла:
+    {{ post.title }}
   </div>
   <div class="">
-    Author:
-    {{ book.author }}
+    Тема:
+    {{ post.subject_file  }}
   </div>
   <div class="">
-    Price:
-    {{ book.price }}
-    €
+    Описание файла:
+    {{ post.description_file_post }}
   </div>
   <div class="">
-    Pages:
-    {{ book.pages }}
+    Дата загрузки файла:
+    {{ post.published_date }}
   </div>
-  <div class="">
-    Type:
-    {{ book.get_book_type_display }}
-  </div>
-  <div class="">
-    Publication date:
-    {{ book.publication_date }}
-  </div>
-
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <a href="media/{{ post.file }}" class="btn btn-sm btn-outline-success" download><i class="fas fa-download"></i></a>
+  <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+
 </div>

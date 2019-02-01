@@ -35,7 +35,9 @@
                     padding-bottom: 3px;
                     padding-left: 3px;
             }
-
+.sidebar-nav li a:hover {
+color: #495057;
+}
         </style>
 </head>
 <body>
@@ -47,12 +49,13 @@
 <div id="wrapper">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+        <div id="sidebar-wrapper" style="background: #f8f9fa">
+            <ul class="sidebar-nav" >
+                <li class="sidebar-brand" style="margin-bottom: 35px; margin-top: 15px;">
                     <a href="/">
-                        Список документов
+                        <center><img src="{% static 'img/logo.png' %}" alt="ГАЗПРОМ" ></center>
                     </a>
+                    </br><br><br>
                 </li>
 
                  {% for subject in subjects %}
@@ -159,6 +162,30 @@
 
 
 {% endblock %}
+<!-- Footer -->
+<footer class="page-footer font-small indigo">
 
+    <!-- Footer Links -->
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+
+
+        <!-- Grid column -->
+           {% for subject in subjects %}
+        <div class="col-md-2 mb-3">
+          <h6 class="text-uppercase font-weight-bold">
+                    <a href="{% url 'subject_detail' fl=subject.slug %}">{{ subject.subject_files }}</a>
+
+          </h6>
+        </div>
+            {% endfor %}
+        <!-- Grid column -->
+
+      </div>
+
+  </footer>
+  <!-- Footer -->
 </body>
 </html>

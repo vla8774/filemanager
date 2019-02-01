@@ -15,21 +15,30 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.sites import requests
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.template.context_processors import static
 from django.urls import path, include
 
+from account import views
 from mysite import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+
+
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('file.urls')),
     url(r'^account/', include('account.urls')),
 
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
